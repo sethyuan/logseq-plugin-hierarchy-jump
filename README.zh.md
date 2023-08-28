@@ -9,3 +9,5 @@
 - 支持 namespace 页面。
 
 ## 使用展示
+
+https://github.com/sethyuan/logseq-plugin-hierarchy-jump/assets/3410293/de90fe8b-a299-41e2-84fa-662376e6df57
