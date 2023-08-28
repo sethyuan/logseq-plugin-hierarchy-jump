@@ -1,1 +1,5 @@
-{}
+{
+  "No page detected.": "未检测到页面。",
+  "No hierarchy detected.": "未检测到结构",
+  "Can't get the namespace page.": "无法获取 namespace 页面"
+}
