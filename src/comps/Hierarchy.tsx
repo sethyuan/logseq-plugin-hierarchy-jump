@@ -27,19 +27,28 @@ export default function Hierarchy({
         | PageEntity[]
         | null
       if (dbResult) {
-        setNodes(dbResult)
+        const nodes = dbResult.sort(
+          (a, b) =>
+            (a.properties?.fixed ?? Infinity) -
+            (b.properties?.fixed ?? Infinity),
+        )
+        setNodes(nodes)
       }
     })()
-  }, [])
+  }, [ns])
 
   const goto = useCallback(() => {
     ;(logseq.Editor.scrollToBlockInPage as any)(ns.name)
-  }, [])
+  }, [ns])
 
   return (
     <div class="kef-hj-node">
       <div class="kef-hj-name" onClick={goto}>
-        <span dangerouslySetInnerHTML={{ __html: PageIcon }} />{" "}
+        {ns.properties?.icon ? (
+          <span>{ns.properties.icon}</span>
+        ) : (
+          <span dangerouslySetInnerHTML={{ __html: PageIcon }} />
+        )}{" "}
         <span class={cls(ns.name === activePage.name && "kef-hj-active")}>
           {ns.originalName.substring(pageNameIndex)}
         </span>

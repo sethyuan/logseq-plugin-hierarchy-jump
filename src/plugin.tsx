@@ -18,10 +18,12 @@ async function main() {
   })
 
   injectVars()
-  const themeOff = logseq.App.onThemeModeChanged(() => injectVars())
+  const themeModeOff = logseq.App.onThemeModeChanged(() => injectVars())
+  const themeOff = logseq.App.onThemeChanged(() => injectVars())
 
   logseq.beforeunload(async () => {
     themeOff()
+    themeModeOff()
     document.body.removeEventListener("click", closePopover)
   })
 
@@ -56,7 +58,7 @@ function injectVars() {
   )
   document.documentElement.style.setProperty(
     "--kef-hj-active-color",
-    vars.getPropertyValue("--ls-active-secondary-color"),
+    vars.getPropertyValue("--ls-active-primary-color"),
   )
   document.documentElement.style.setProperty(
     "--kef-hj-active-bg-color",
@@ -82,6 +84,11 @@ async function getNamespaceRoot(page: PageEntity) {
   return root
 }
 
+async function isNamespace(page: PageEntity) {
+  const result = await logseq.DB.q(`(namespace "${page.name}")`)
+  return result && result.length > 0
+}
+
 const model = {
   async show() {
     const root = document.getElementById("root")!
@@ -93,7 +100,7 @@ const model = {
       return
     }
 
-    if (!page.namespace) {
+    if (!page.namespace && !(await isNamespace(page))) {
       await logseq.UI.showMsg(t("No hierarchy detected."), "info")
       return
     }
