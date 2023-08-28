@@ -18,8 +18,10 @@ async function main() {
   })
 
   injectVars()
-  const themeModeOff = logseq.App.onThemeModeChanged(() => injectVars())
-  const themeOff = logseq.App.onThemeChanged(() => injectVars())
+  const themeModeOff = logseq.App.onThemeModeChanged(() =>
+    setTimeout(injectVars, 100),
+  )
+  const themeOff = logseq.App.onThemeChanged(() => setTimeout(injectVars, 100))
 
   logseq.beforeunload(async () => {
     themeOff()
