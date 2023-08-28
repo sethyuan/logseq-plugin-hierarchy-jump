@@ -21,8 +21,43 @@
       position: fixed;
       top: 0;
       left: 0;
-      background-color: #fff;
+      background-color: var(--kef-hj-bg-color);
+      color: var(--kef-hj-text-color);
       translate: -100%;
+      min-width: 300px;
+      padding: 0.5em 0.75em;
+      box-shadow: 0 0 14px 0 var(--kef-hj-shadow-color);
+      border-radius: 4px;
+    }
+
+    .kef-hj-node {
+      font-family: var(--kef-hj-font-family);
+      font-size: 14px;
+      line-height: 2;
+      cursor: pointer;
+    }
+
+    .kef-hj-icon {
+      vertical-align: middle;
+      translate: 0 -1px;
+    }
+
+    .kef-hj-name {
+      width: max-content;
+      min-width: 100%;
+    }
+
+    .kef-hj-name:hover {
+      background-color: var(--kef-hj-active-bg-color);
+    }
+
+    .kef-hj-subnodes {
+      margin-left: 1.25em;
+    }
+
+    .kef-hj-active {
+      color: var(--kef-hj-active-color);
+      font-weight: 600;
     }
   </style>
 </head>

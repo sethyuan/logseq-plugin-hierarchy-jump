@@ -14,7 +14,8 @@
   "dependencies": {
     "@logseq/libs": "^0.0.15",
     "logseq-l10n": "^0.2.0",
-    "preact": "^10.17.1"
+    "preact": "^10.17.1",
+    "reactutils": "^5.13.0"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.5.0",

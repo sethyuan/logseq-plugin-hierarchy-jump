@@ -1,4 +1,5 @@
 import "@logseq/libs"
+import { PageEntity } from "@logseq/libs/dist/LSPlugin.user"
 import { setup, t } from "logseq-l10n"
 import { render } from "preact"
 import Hierarchy from "./comps/Hierarchy"
@@ -16,7 +17,11 @@ async function main() {
     template: `<a id="kef-hj-entry" data-on-click="show">&#xf289;</a>`,
   })
 
+  injectVars()
+  const themeOff = logseq.App.onThemeModeChanged(injectVars)
+
   logseq.beforeunload(async () => {
+    themeOff()
     document.body.removeEventListener("click", closePopover)
   })
 
@@ -35,8 +40,46 @@ function provideStyles() {
   })
 }
 
+function injectVars() {
+  const vars = parent.getComputedStyle(parent.document.documentElement)
+  document.documentElement.style.setProperty(
+    "--kef-hj-text-color",
+    vars.getPropertyValue("--ls-primary-text-color"),
+  )
+  document.documentElement.style.setProperty(
+    "--kef-hj-bg-color",
+    vars.getPropertyValue("--ls-secondary-background-color"),
+  )
+  document.documentElement.style.setProperty(
+    "--kef-hj-shadow-color",
+    vars.getPropertyValue("--ls-block-bullet-color"),
+  )
+  document.documentElement.style.setProperty(
+    "--kef-hj-active-color",
+    vars.getPropertyValue("--ls-active-secondary-color"),
+  )
+  document.documentElement.style.setProperty(
+    "--kef-hj-active-bg-color",
+    vars.getPropertyValue("--ls-menu-hover-color"),
+  )
+  document.documentElement.style.setProperty(
+    "--kef-hj-font-family",
+    vars.getPropertyValue("--ls-font-family"),
+  )
+}
+
 function closePopover() {
   logseq.hideMainUI({ restoreEditingCursor: true })
+}
+
+async function getNamespaceRoot(page: PageEntity) {
+  let root: PageEntity | null = page
+
+  while (root?.namespace?.id) {
+    root = await logseq.Editor.getPage(root.namespace.id)
+  }
+
+  return root
 }
 
 const model = {
@@ -55,7 +98,7 @@ const model = {
       return
     }
 
-    const nsPage = await logseq.Editor.getPage(page.namespace.id)
+    const nsPage = await getNamespaceRoot(page)
 
     if (nsPage == null) {
       await logseq.UI.showMsg(t("Can't get the namespace page."), "error")
@@ -63,10 +106,10 @@ const model = {
     }
 
     const rect = (await logseq.App.queryElementRect("#kef-hj-entry"))!
-    root.style.top = `${rect.top + rect.height + 10}px`
-    root.style.left = `${rect.left}px`
+    root.style.top = `${rect.bottom + 20}px`
+    root.style.left = `${rect.right}px`
 
-    render(<Hierarchy ns={nsPage} />, root)
+    render(<Hierarchy activePage={page} ns={nsPage} pageNameIndex={0} />, root)
 
     logseq.showMainUI({ autoFocus: true })
   },
