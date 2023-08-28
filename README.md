@@ -9,3 +9,5 @@ Identifies the current page's hierarchy and offer a quicker navigation.
 - Support namespace pages.
 
 ## Usage
+
+https://github.com/sethyuan/logseq-plugin-hierarchy-jump/assets/3410293/de90fe8b-a299-41e2-84fa-662376e6df57
