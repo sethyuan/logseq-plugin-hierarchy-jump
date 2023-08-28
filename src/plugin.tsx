@@ -14,7 +14,7 @@ async function main() {
 
   logseq.App.registerUIItem("pagebar", {
     key: "kef-hj-entry",
-    template: `<a id="kef-hj-entry" data-on-click="show">&#xf289;</a>`,
+    template: `<a id="kef-hj-entry" class="button" data-on-click="show">&#xf289;</a>`,
   })
 
   injectVars()
@@ -36,7 +36,7 @@ function provideStyles() {
     style: `
     #kef-hj-entry {
       font-family: "tabler-icons";
-      cursor: pointer;
+      margin: 0 4px;
     }
     `,
   })
