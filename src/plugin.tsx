@@ -23,7 +23,12 @@ async function main() {
   )
   const themeOff = logseq.App.onThemeChanged(() => setTimeout(injectVars, 100))
 
+  const routeOff = logseq.App.onRouteChanged(({ template, parameters }) => {
+    onRouteChange(template, parameters)
+  })
+
   logseq.beforeunload(async () => {
+    routeOff()
     themeOff()
     themeModeOff()
     document.body.removeEventListener("click", closePopover)
@@ -89,6 +94,39 @@ async function getNamespaceRoot(page: PageEntity) {
 async function isNamespace(page: PageEntity) {
   const result = await logseq.DB.q(`(namespace "${page.name}")`)
   return result && result.length > 0
+}
+
+async function onRouteChange(template: string, parameters: any) {
+  if (template !== "/page/:name") {
+    hideButton()
+    return
+  }
+
+  const pageName: string = parameters.path.name
+  const page = await logseq.Editor.getPage(pageName)
+  if (page == null || (!page.namespace && !(await isNamespace(page)))) {
+    hideButton()
+  } else {
+    showButton()
+  }
+}
+
+function hideButton() {
+  setTimeout(() => {
+    const button = parent.document.getElementById("kef-hj-entry")
+    if (button != null) {
+      button.style.display = "none"
+    }
+  }, 32)
+}
+
+function showButton() {
+  setTimeout(() => {
+    const button = parent.document.getElementById("kef-hj-entry")
+    if (button != null) {
+      button.style.display = ""
+    }
+  }, 32)
 }
 
 const model = {
