@@ -25,15 +25,19 @@
     }
 
     #root {
-      background-color: var(--kef-hj-bg-color);
-      color: var(--kef-hj-text-color);
+      position: relative;
       width: max-content;
       min-width: 300px;
+      background-color: var(--kef-hj-bg-color);
+      color: var(--kef-hj-text-color);
+      box-shadow: 0 0 14px 0 var(--kef-hj-shadow-color);
+      border-radius: 4px;
+    }
+
+    .kef-hj-container {
       max-height: 70vh;
       overflow: auto;
       padding: 0.5em 0.75em;
-      box-shadow: 0 0 14px 0 var(--kef-hj-shadow-color);
-      border-radius: 4px;
     }
 
     .kef-hj-node {
@@ -77,6 +81,7 @@
       color: var(--kef-hj-active-color);
       background-color: var(--kef-hj-active-bg-color);
       border-radius: 0 0 0 4px;
+      opacity: 0.8;
     }
   </style>
 </head>

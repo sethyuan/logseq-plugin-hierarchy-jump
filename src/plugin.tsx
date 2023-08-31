@@ -158,7 +158,7 @@ const model = {
     root.style.translate = `calc(${rect.right}px - 100%) ${rect.bottom + 20}px`
 
     render(
-      <>
+      <div class="kef-hj-container">
         <a
           class="kef-hj-pro"
           href="https://github.com/sethyuan/logseq-hierarchy-jump"
@@ -167,7 +167,7 @@ const model = {
           {t("Get Pro 🛒")}
         </a>
         <Hierarchy activePage={page} ns={nsPage} pageNameIndex={0} />
-      </>,
+      </div>,
       root,
     )
 
