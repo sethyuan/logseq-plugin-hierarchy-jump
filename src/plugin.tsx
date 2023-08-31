@@ -78,6 +78,8 @@ function injectVars() {
 }
 
 function closePopover() {
+  const root = document.getElementById("root")!
+  render(null, root)
   logseq.hideMainUI({ restoreEditingCursor: true })
 }
 
