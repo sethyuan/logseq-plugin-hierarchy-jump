@@ -21,6 +21,7 @@
 
     body {
       overflow: auto;
+      font-family: var(--kef-hj-font-family);
     }
 
     #root {
@@ -36,7 +37,6 @@
     }
 
     .kef-hj-node {
-      font-family: var(--kef-hj-font-family);
       font-size: 14px;
       line-height: 2;
       cursor: pointer;
@@ -63,6 +63,20 @@
 
     .kef-hj-active {
       color: var(--kef-hj-active-color);
+    }
+
+    .kef-hj-pro {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 9;
+      padding: 0.25em 0.5em;
+      text-align: right;
+      text-decoration: none;
+      font-size: 0.875em;
+      color: var(--kef-hj-active-color);
+      background-color: var(--kef-hj-active-bg-color);
+      border-radius: 0 0 0 4px;
     }
   </style>
 </head>

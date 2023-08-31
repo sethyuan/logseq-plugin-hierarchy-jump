@@ -155,7 +155,19 @@ const model = {
     const rect = (await logseq.App.queryElementRect("#kef-hj-entry"))!
     root.style.translate = `calc(${rect.right}px - 100%) ${rect.bottom + 20}px`
 
-    render(<Hierarchy activePage={page} ns={nsPage} pageNameIndex={0} />, root)
+    render(
+      <>
+        <a
+          class="kef-hj-pro"
+          href="https://github.com/sethyuan/logseq-hierarchy-jump"
+          target="_blank"
+        >
+          {t("Get Pro 🛒")}
+        </a>
+        <Hierarchy activePage={page} ns={nsPage} pageNameIndex={0} />
+      </>,
+      root,
+    )
 
     logseq.showMainUI({ autoFocus: true })
   },
