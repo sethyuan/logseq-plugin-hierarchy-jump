@@ -153,8 +153,7 @@ const model = {
     }
 
     const rect = (await logseq.App.queryElementRect("#kef-hj-entry"))!
-    root.style.top = `${rect.bottom + 20}px`
-    root.style.left = `${rect.right}px`
+    root.style.translate = `calc(${rect.right}px - 100%) ${rect.bottom + 20}px`
 
     render(<Hierarchy activePage={page} ns={nsPage} pageNameIndex={0} />, root)
 
