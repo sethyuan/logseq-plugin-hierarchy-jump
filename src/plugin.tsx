@@ -154,7 +154,7 @@ const model = {
       return
     }
 
-    const rect = (await logseq.App.queryElementRect("#kef-hj-entry"))!
+    const rect = (await (logseq.UI as any).queryElementRect("#kef-hj-entry"))!
     root.style.translate = `calc(${rect.right}px - 100%) ${rect.bottom + 20}px`
 
     render(
